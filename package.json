@@ -1,7 +1,7 @@
 {
-  "name": "audiovisual-web",
+  "name": "VinVideos",
   "version": "1.0.0",
-  "description": "视频解析播放器",
+  "description": "视频解析播放器 - Video Parser Player",
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build process'"
@@ -10,7 +10,15 @@
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {},
-  "keywords": ["video", "parser", "player"],
-  "author": "RemotePinee",
-  "license": "MIT"
+  "keywords": [
+    "video",
+    "parser",
+    "player",
+    "netlify"
+  ],
+  "author": "ZYDS.NET",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
 }
