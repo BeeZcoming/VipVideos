@@ -194,7 +194,25 @@
             </div>
         </div>
     </div>
+<!-- 临时测试按钮 -->
+<div style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+    <button onclick="testProxy()" style="padding: 5px 10px; font-size: 12px;">测试代理</button>
+</div>
 
+<script>
+async function testProxy() {
+    try {
+        const response = await fetch('/api/proxy?url=https://www.baidu.com');
+        if (response.ok) {
+            alert('代理函数正常工作！');
+        } else {
+            alert('代理函数错误: ' + response.status);
+        }
+    } catch (error) {
+        alert('代理函数失败: ' + error.message);
+    }
+}
+</script>
     <script src="script.js"></script>
 </body>
 </html>
