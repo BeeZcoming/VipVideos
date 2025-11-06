@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioVisual - 视频解析播放器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧控制面板 -->
+        <div class="control-panel">
+            <div class="panel-header">
+                <h1 class="app-title">
+                    <i class="icon-play">▶</i>
+                    AudioVisual
+                </h1>
+            </div>
+
+            <!-- 平台选择 -->
+            <div class="control-section">
+                <label class="section-label">平台导航:</label>
+                <select class="platform-select" id="platform-select">
+                    <option value="">请选择平台</option>
+                    <option value="mgtv">芒果TV</option>
+                    <option value="iqiyi">爱奇艺</option>
+                    <option value="tencent">腾讯视频</option>
+                    <option value="youku">优酷</option>
+                    <option value="bilibili">哔哩哔哩</option>
+                </select>
+            </div>
+
+            <!-- 解析接口 -->
+            <div class="control-section">
+                <label class="section-label">解析接口:</label>
+                <select class="api-select" id="api-select">
+                    <option value="api1">799解析</option>
+                    <option value="api2">维新接口</option>
+                    <option value="api3">稳定线路</option>
+                    <option value="api4">高速通道</option>
+                </select>
+            </div>
+
+            <!-- 解析按钮 -->
+            <button class="parse-btn" id="parse-btn">
+                <span class="btn-icon">▶</span>
+                <span class="btn-text">P A R S E !</span>
+            </button>
+
+            <!-- 美韩日剧模式 -->
+            <div class="drama-section">
+                <button class="drama-mode-btn" id="drama-mode-btn">
+                    <span class="btn-icon">🌍</span>
+                    <span class="btn-text">美韩日剧</span>
+                </button>
+                
+                <div class="drama-sites" id="drama-sites">
+                    <button class="site-btn" data-site="netflix">
+                        <span class="site-icon">🎬</span>
+                        <span class="site-name">奈飞工厂</span>
+                    </button>
+                    <button class="site-btn" data-site="7movie">
+                        <span class="site-icon">📺</span>
+                        <span class="site-name">七点电影</span>
+                    </button>
+                    <button class="site-btn" data-site="kanpian">
+                        <span class="site-icon">🎥</span>
+                        <span class="site-name">看片狂人</span>
+                    </button>
+                    <button class="site-btn" data-site="gazf">
+                        <span class="site-icon">🔷</span>
+                        <span class="site-name">GAZF</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 使用提示 -->
+            <div class="tips-section">
+                <h4 class="tips-title">使用提示</h4>
+                <ul class="tips-list">
+                    <li><strong>解析失败:</strong> 请尝试更换上方的解析接口，或检查视频链接是否正确。</li>
+                    <li><strong>广告:</strong> 部分解析接口可能会有广告，请耐心等待或更换接口。</li>
+                    <li><strong>安全:</strong> 请勿在视频播放页面输入任何个人敏感信息。</li>
+                </ul>
+            </div>
+
+            <!-- 免责声明 -->
+            <div class="disclaimer-section">
+                <h4 class="disclaimer-title">免责声明</h4>
+                <p class="disclaimer-text">
+                    软件为开源项目，如您是花钱购买请向购买平台投诉，一切损失与开发者无关，项目内所有资源均来源于互联网，本项目只做整合，如侵犯您的权益请联系邮箱删除！！
+                </p>
+                <p class="contact-email">
+                    <strong>Email：</strong>
+                    <a href="mailto:fenghaoran60@gmail.com">fenghaoran60@gmail.com</a>
+                </p>
+            </div>
+
+            <!-- 底部区域 -->
+            <div class="footer-section">
+                <div class="update-area" id="update-area">
+                    <!-- 更新通知区域 -->
+                </div>
+                <button class="update-btn" id="check-update-btn">检查更新</button>
+                <a href="https://github.com/RemotePinee/AudioVisual" class="github-link" target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+
+        <!-- 右侧内容区域 -->
+        <div class="content-area">
+            <!-- 顶部导航栏 -->
+            <div class="top-navbar">
+                <div class="nav-controls">
+                    <button class="nav-btn" id="back-btn" disabled title="后退">
+                        ←
+                    </button>
+                    <button class="nav-btn" id="forward-btn" disabled title="前进">
+                        →
+                    </button>
+                    <button class="nav-btn" id="home-btn" title="首页">
+                        🏠
+                    </button>
+                </div>
+                
+                <div class="url-input-container">
+                    <input type="text" class="url-input" id="url-input" placeholder="将视频链接粘贴于此...">
+                    <button class="go-btn" id="go-btn">Go</button>
+                </div>
+
+                <div class="window-controls">
+                    <button class="win-btn minimize" id="minimize-btn">−</button>
+                    <button class="win-btn maximize" id="maximize-btn">□</button>
+                    <button class="win-btn close" id="close-btn">×</button>
+                </div>
+            </div>
+
+            <!-- 网页内容容器 -->
+            <div class="webview-container">
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="spinner"></div>
+                    <p>正在加载...</p>
+                </div>
+                
+                <div class="initial-screen" id="initial-screen">
+                    <div class="welcome-content">
+                        <div class="welcome-icon">🎬</div>
+                        <h2>欢迎使用 AudioVisual</h2>
+                        <p>选择左侧平台开始观看视频，或使用美韩日剧模式观看海外剧集</p>
+                        
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="total-parsed">0</div>
+                                <div class="stat-label">累计解析</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="active-apis">4</div>
+                                <div class="stat-label">可用接口</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="drama-sites-count">4</div>
+                                <div class="stat-label">剧集站点</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 内嵌网页容器 -->
+                <iframe class="webview-frame" id="webview-frame" style="display: none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                
+                <!-- 视频播放器容器 -->
+                <div class="video-player-container" id="video-player" style="display: none;">
+                    <video class="video-element" id="video-element" controls>
+                        您的浏览器不支持视频播放
+                    </video>
+                    <div class="player-controls">
+                        <div class="time-display" id="time-display">00:00 / 00:00</div>
+                        <div class="player-buttons">
+                            <button class="player-btn" id="play-pause-btn">▶</button>
+                            <button class="player-btn" id="fullscreen-btn">⛶</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 状态栏 -->
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="status-item" id="current-site">未选择平台</span>
+                    <span class="status-item" id="current-api">799解析</span>
+                </div>
+                <div class="status-right">
+                    <span class="status-item" id="connection-status">🟢 已连接</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

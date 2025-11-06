@@ -1,0 +1,16 @@
+{
+  "name": "audiovisual-web",
+  "version": "1.0.0",
+  "description": "视频解析播放器",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build process'"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {},
+  "keywords": ["video", "parser", "player"],
+  "author": "RemotePinee",
+  "license": "MIT"
+}
